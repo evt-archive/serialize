@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.name = 'serialize'
   s.version = '0.1.0'
-  s.summary = 'Common interface for serialization and deserialize, and serializer discovery'
+  s.summary = 'Common interface for serialization and deserialization, and serializer discovery'
   s.description = ' '
 
   s.authors = ['Obsidian Software, Inc']
