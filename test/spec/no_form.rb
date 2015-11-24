@@ -1,8 +1,8 @@
 require_relative 'spec_init'
 
-describe 'Subject has No Serializer Namespace' do
+describe 'Subject has No Form' do
   specify 'Writes' do
-    example = Serialize::Controls::NoSerializerNamespace.example
+    example = Serialize::Controls::NoForm.example
 
     assert_raises Serialize::Error do
       Serialize::Write.(example, :some_serializer)
@@ -10,7 +10,7 @@ describe 'Subject has No Serializer Namespace' do
   end
 
   specify 'Reads' do
-    example = Serialize::Controls::NoSerializerNamespace.example_class
+    example = Serialize::Controls::NoForm.example_class
 
     assert_raises Serialize::Error do
       Serialize::Read.(example, :some_serializer)
