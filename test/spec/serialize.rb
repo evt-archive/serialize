@@ -1,29 +1,37 @@
 require_relative 'spec_init'
 
 class Example
-  module Serializerx
-    def self.json
-      JSON
+  module Serializer
+    def self.some_serializer
+      SomeSerializer
     end
 
-    module JSON
+    module SomeSerializer
       def self.read(text)
+        'some read'
       end
 
       def self.write(obj)
-        'some output'
+        'some write'
       end
     end
   end
 end
 
-describe 'Serialize' do
-  specify do
+describe 'Serializer' do
+  example = Example.new
+
+  specify 'Writes' do
     example = Example.new
-    output = Serialize::Write.(example, :json)
+    val = Serialize::Write.(example, :some_serializer)
 
-    __logger.focus output
+    assert(val == 'some write')
+  end
 
-    # assert(output == 'some output')
+  specify 'Reads' do
+    example = Example.new
+    val = Serialize::Read.(Example, :some_serializer)
+
+    assert(val == 'some read')
   end
 end

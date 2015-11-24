@@ -1,5 +1,5 @@
 module Serialize
-  module Write
+  module Read
     class Error < RuntimeError; end
 
     def self.call(subject, form)
@@ -11,8 +11,8 @@ module Serialize
       assure_form(form, serializer_namespace)
       serializer = serializer_namespace.send(form)
 
-      assure_write(serializer)
-      serializer.write subject
+      assure_read(serializer)
+      serializer.read subject
     end
 
     def self.subject_const(subject)
@@ -31,9 +31,9 @@ module Serialize
       end
     end
 
-    def self.assure_write(serializer)
-      unless serializer.respond_to?(:write)
-        raise Error, "#{serializer.name} does not implement `write'"
+    def self.assure_read(serializer)
+      unless serializer.respond_to?(:read)
+        raise Error, "#{serializer.name} does not implement `read'"
       end
     end
   end
