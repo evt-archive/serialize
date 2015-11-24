@@ -7,6 +7,6 @@ puts RUBY_DESCRIPTION
 require_relative '../init.rb'
 
 require 'runner'
-# require 'serialize/controls'
+require 'serialize/controls'
 
 Telemetry::Logger::AdHoc.activate

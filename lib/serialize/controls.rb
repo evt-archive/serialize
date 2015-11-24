@@ -1,0 +1,1 @@
+require 'serialize/controls/serializer'
