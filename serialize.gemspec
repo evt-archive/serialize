@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
 
   s.authors = ['Obsidian Software, Inc']
   s.email = 'opensource@obsidianexchange.com'
-  s.homepage = 'https://github.com/obsidian-btc/error-data'
+  s.homepage = 'https://github.com/obsidian-btc/serialize'
   s.licenses = ['MIT']
 
   s.require_paths = ['lib']
