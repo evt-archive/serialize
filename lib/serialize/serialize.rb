@@ -1,7 +1,9 @@
 module Serialize
   class Error < RuntimeError; end
 
-  def call(subject, form)
+  def call(subject, form, intermediate: nil)
+    intermediate ||= false
+
     subject_const = subject_const(subject)
 
     assure_namespace(subject_const)
@@ -10,8 +12,17 @@ module Serialize
     assure_form(form, serializer_namespace)
     serializer = serializer_namespace.send(form)
 
-    assure_mode(serializer)
+    mode = self.mode
+    if intermediate
+      mode = :intermediate
+    end
+
+    assure_mode(serializer, mode)
+
     serializer.send mode, subject
+  end
+
+  def intermediate(subject, form)
   end
 
   def subject_const(subject)
@@ -30,7 +41,7 @@ module Serialize
     end
   end
 
-  def assure_mode(serializer)
+  def assure_mode(serializer, mode)
     unless serializer.respond_to?(mode)
       raise Error, "#{serializer.name} does not implement `#{mode}'"
     end

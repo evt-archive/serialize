@@ -11,6 +11,10 @@ module Serialize
             'some read'
           end
 
+          def self.intermediate(subject)
+            'some intermediate data'
+          end
+
           def self.write(obj)
             'some write'
           end
