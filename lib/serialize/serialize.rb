@@ -4,17 +4,20 @@ module Serialize
   def call(subject, form, mode: nil)
     mode ||= self.mode
 
+    serializer = serializer(subject, form)
+
+    assure_mode(serializer, mode)
+    serializer.send mode, subject
+  end
+
+  def serializer(subject, form)
     subject_const = subject_const(subject)
 
     assure_namespace(subject_const)
     serializer_namespace = subject_const.const_get(:Serializer)
 
     assure_form(form, serializer_namespace)
-    serializer = serializer_namespace.send(form)
-
-    assure_mode(serializer, mode)
-
-    serializer.send mode, subject
+    serializer_namespace.send(form)
   end
 
   def subject_const(subject)
