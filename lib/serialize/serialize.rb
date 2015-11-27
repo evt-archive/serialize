@@ -1,23 +1,30 @@
 module Serialize
   class Error < RuntimeError; end
 
-  def call(subject, form, mode: nil)
-    mode ||= self.mode
+  def call(subject, form)
+    serializer = serializer(subject, form)
 
+    assure_mode(serializer, mode)
+    serializer.send mode, subject
+  end
+
+  def serializer(subject, form)
     subject_const = subject_const(subject)
 
     assure_namespace(subject_const)
     serializer_namespace = subject_const.const_get(:Serializer)
 
     assure_form(form, serializer_namespace)
-    serializer = serializer_namespace.send(form)
+    serializer_namespace.send(form)
+  end
 
+  def raw_data(subject, form)
+    serializer = serializer(subject, form)
+
+    mode = :raw_data
     assure_mode(serializer, mode)
 
     serializer.send mode, subject
-  end
-
-  def intermediate(subject, form)
   end
 
   def subject_const(subject)

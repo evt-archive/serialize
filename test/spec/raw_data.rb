@@ -1,9 +1,9 @@
 require_relative 'spec_init'
 
-describe 'Intermediate Form' do
-  specify 'Can optionally be provided by the serializer' do
+describe "Get Raw Data from Serializer Before it's Converted" do
+  specify "Ruby hash" do
     example = Serialize::Controls.example
-    val = Serialize::Write.(example, :some_serializer, mode: :raw_data)
+    val = Serialize::Write.raw_data(example, :some_serializer)
 
     assert(val == 'some raw data')
   end
