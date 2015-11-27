@@ -17,9 +17,6 @@ module Serialize
     serializer.send mode, subject
   end
 
-  def intermediate(subject, form)
-  end
-
   def subject_const(subject)
     [Module, Class].include?(subject.class) ? subject : subject.class
   end
