@@ -15,6 +15,10 @@ module Serialize
             'some raw data'
           end
 
+          def self.formatted_data(raw_data)
+            'some formatted data'
+          end
+
           def self.write(obj)
             'some write'
           end

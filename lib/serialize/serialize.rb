@@ -27,6 +27,15 @@ module Serialize
     serializer.send mode, subject
   end
 
+  def formatted_data(raw_data, subject, form)
+    serializer = serializer(subject, form)
+
+    mode = :formatted_data
+    assure_mode(serializer, mode)
+
+    serializer.send mode, raw_data
+  end
+
   def subject_const(subject)
     [Module, Class].include?(subject.class) ? subject : subject.class
   end
