@@ -1,8 +1,8 @@
 module Serialize
   class Error < RuntimeError; end
 
-  def call(subject, form, intermediate: nil)
-    intermediate ||= false
+  def call(subject, form, mode: nil)
+    mode ||= self.mode
 
     subject_const = subject_const(subject)
 
@@ -11,11 +11,6 @@ module Serialize
 
     assure_form(form, serializer_namespace)
     serializer = serializer_namespace.send(form)
-
-    mode = self.mode
-    if intermediate
-      mode = :intermediate
-    end
 
     assure_mode(serializer, mode)
 

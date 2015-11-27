@@ -11,8 +11,8 @@ module Serialize
             'some read'
           end
 
-          def self.intermediate(subject)
-            'some intermediate data'
+          def self.raw_data(subject)
+            'some raw data'
           end
 
           def self.write(obj)
