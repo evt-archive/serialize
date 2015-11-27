@@ -1,13 +1,6 @@
 module Serialize
   class Error < RuntimeError; end
 
-  def call(subject, form)
-    serializer = serializer(subject, form)
-
-    assure_mode(serializer, mode)
-    serializer.send mode, subject
-  end
-
   def serializer(subject, form)
     subject_const = subject_const(subject)
 

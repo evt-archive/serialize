@@ -7,11 +7,4 @@ describe 'Serializer' do
 
     assert(val == 'some write')
   end
-
-  specify 'Reads' do
-    example = Serialize::Controls.example_class
-    val = Serialize::Read.(example, :some_serializer)
-
-    assert(val == 'some read')
-  end
 end

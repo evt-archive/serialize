@@ -11,21 +11,11 @@ describe "Failure Modes" do
 
     describe "Subject Has No #{descripton}" do
       context "Writing" do
-        example = Serialize::Controls::NoSerializerNamespace.example
+        example = control_namespace.example
 
         specify "Is an error" do
           assert_raises Serialize::Error do
             Serialize::Write.(example, :some_serializer)
-          end
-        end
-      end
-
-      context "Reading" do
-        example = Serialize::Controls::NoSerializerNamespace.example_class
-
-        specify "Is an error" do
-          assert_raises Serialize::Error do
-            Serialize::Read.(example, :some_serializer)
           end
         end
       end
