@@ -1,10 +1,14 @@
 require_relative 'spec_init'
 
-describe "Get Raw Data from Serializer Before it's Converted" do
-  specify "Ruby hash" do
-    example = Serialize::Controls.example
-    val = Serialize::Write.raw_data(example, :some_serializer)
+describe "Raw Data" do
+  [:Write, :Read].each do |constant_name|
+    specify "Can be retrieved from serializer before it's converted" do
+      example = Serialize::Controls.example
 
-    assert(val == 'some raw data')
+      serializer_class = Serialize.const_get(constant_name)
+      raw_data = serializer_class.raw_data(example, :some_serializer)
+
+      assert(raw_data == 'some raw data')
+    end
   end
 end

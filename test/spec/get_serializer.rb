@@ -1,11 +1,14 @@
 require_relative 'spec_init'
 
-describe 'Intermediate Form' do
-  specify 'Can optionally be provided by the serializer' do
-    example = Serialize::Controls.example
+describe "Serializer" do
+  [:Write, :Read].each do |constant_name|
+    specify "Can be retrieved from the subject" do
+      example = Serialize::Controls.example
 
-    serializer = Serialize::Write.serializer(example, :some_serializer)
+      serializer_class = Serialize.const_get(constant_name)
+      serializer = serializer_class.serializer(example, :some_serializer)
 
-    assert(serializer == Serialize::Controls::Example::Serializer::SomeSerializer)
+      assert(serializer == Serialize::Controls::Example::Serializer::SomeSerializer.const_get(constant_name))
+    end
   end
 end

@@ -4,11 +4,14 @@ module Serialize
   def serializer(subject, form)
     subject_const = subject_const(subject)
 
-    assure_namespace(subject_const)
+    assure_serializer_namespace(subject_const)
     serializer_namespace = subject_const.const_get(:Serializer)
 
-    assure_form(form, serializer_namespace)
-    serializer_namespace.send(form)
+    assure_form_method(form, serializer_namespace)
+    form_namespace = serializer_namespace.send(form)
+
+    assure_mode_namespace(form_namespace)
+    form_namespace.const_get(mode_constant_name)
   end
 
   def raw_data(subject, form)
@@ -33,13 +36,19 @@ module Serialize
     [Module, Class].include?(subject.class) ? subject : subject.class
   end
 
-  def assure_namespace(subject_const)
+  def assure_serializer_namespace(subject_const)
     unless subject_const.const_defined?(:Serializer)
       raise Error, "#{subject_const.name} doesn't have a `Serializer' namespace"
     end
   end
 
-  def assure_form(form, serializer_namespace)
+  def assure_mode_namespace(form_namespace)
+    unless form_namespace.const_defined?(mode_constant_name)
+      raise Error, "#{form_namespace.name} doesn't have a `#{mode_constant_name}' namespace"
+    end
+  end
+
+  def assure_form_method(form, serializer_namespace)
     unless serializer_namespace.respond_to?(form)
       raise Error, "#{serializer_namespace.name} does not implement `#{form}'"
     end

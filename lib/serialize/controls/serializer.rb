@@ -7,20 +7,32 @@ module Serialize
         end
 
         module SomeSerializer
-          def self.read(text)
-            'some read'
+          module Write
+            def self.call(obj)
+              'some write'
+            end
+
+            def self.raw_data(subject)
+              'some raw data'
+            end
+
+            def self.formatted_data(raw_data)
+              'some formatted data'
+            end
           end
 
-          def self.raw_data(subject)
-            'some raw data'
-          end
+          module Read
+            def self.call(text)
+              'some read'
+            end
 
-          def self.formatted_data(raw_data)
-            'some formatted data'
-          end
+            def self.raw_data(subject)
+              'some raw data'
+            end
 
-          def self.write(obj)
-            'some write'
+            def self.formatted_data(raw_data)
+              'some formatted data'
+            end
           end
         end
       end
