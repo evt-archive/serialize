@@ -1,12 +1,16 @@
 require_relative 'spec_init'
 
-describe "Get Formatted Data from Serializer Before it's Converted" do
-  specify "Formatted hash" do
-    example = Serialize::Controls.example
-    raw_data = Serialize::Write.raw_data(example, :some_serializer)
+describe "Formatted Data" do
+  [:Write, :Read].each do |constant_name|
+    specify "Can be retrieved from serializer before it's converted" do
+      example = Serialize::Controls.example
 
-    formatted_data = Serialize::Write.formatted_data(raw_data, example, :some_serializer)
+      serializer_class = Serialize.const_get(constant_name)
 
-    assert(formatted_data == 'some formatted data')
+      raw_data = 'some raw data'
+      formatted_data = serializer_class.formatted_data(raw_data, example, :some_serializer)
+
+      assert(formatted_data == 'some formatted data')
+    end
   end
 end
