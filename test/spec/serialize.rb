@@ -1,7 +1,7 @@
 require_relative 'spec_init'
 
-describe 'Serializer' do
-  specify 'Writes' do
+context 'Serializer' do
+  test 'Writes' do
     example = Serialize::Controls.example
     val = Serialize::Write.(example, :some_serializer)
 

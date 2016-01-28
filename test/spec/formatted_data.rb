@@ -1,8 +1,8 @@
 require_relative 'spec_init'
 
-describe "Formatted Data" do
+context "Formatted Data" do
   [:Write, :Read].each do |constant_name|
-    specify "Can be retrieved from serializer before it's converted" do
+    test "Can be retrieved from serializer before it's converted" do
       example = Serialize::Controls.example
 
       serializer_class = Serialize.const_get(constant_name)

@@ -1,6 +1,6 @@
 require_relative 'spec_init'
 
-describe "Read Failure Modes" do
+context "Read Failure Modes" do
   scenarios = {
     'Serializer Namespace' => Serialize::Controls::NoSerializerNamespace,
     'Serializer Form Method' => Serialize::Controls::NoFormMethod,
@@ -9,13 +9,16 @@ describe "Read Failure Modes" do
   }
 
   scenarios.each do |descripton, control_namespace|
-    describe "Subject Has No #{descripton}" do
+    context "Subject Has No #{descripton}" do
       example = control_namespace.example
 
-      specify "Is an error" do
-        assert_raises Serialize::Error do
+      test "Is an error" do
+        begin
           Serialize::Read.('some text', example, :some_serializer)
+        rescue Serialize::Error => error
         end
+
+        assert error
       end
     end
   end

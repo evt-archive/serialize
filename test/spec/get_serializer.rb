@@ -1,8 +1,8 @@
 require_relative 'spec_init'
 
-describe "Serializer" do
+context "Serializer" do
   [:Write, :Read].each do |constant_name|
-    specify "Can be retrieved from the subject" do
+    test "Can be retrieved from the subject" do
       example = Serialize::Controls.example
 
       serializer_class = Serialize.const_get(constant_name)
