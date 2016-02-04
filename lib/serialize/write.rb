@@ -7,7 +7,17 @@ module Serialize
 
       mode = :call
       assure_mode(serializer, mode)
+      raw_data = self.raw_data(subject)
       serializer.send mode, subject
+
+
+      ## raw_data = serializer.raw_data(instance)
+      # raw_data = self.raw_data(subject)
+
+      # formatted_data = serializer.formatted_data(raw_data)
+
+      # json_text = JSON.generate(formatted_data)
+      # json_text
     end
 
     def self.raw_data(instance)

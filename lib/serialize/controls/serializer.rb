@@ -12,12 +12,14 @@ module Serialize
           SomeSerializer
         end
 
+        ## instance
         def self.read(raw_data)
           instance = Example.new
           instance.some_attribute = raw_data
           instance
         end
 
+        ## raw_data
         def self.write(instance)
           instance.some_attribute
         end
@@ -26,10 +28,6 @@ module Serialize
           module Write
             def self.call(obj)
               'some write'
-            end
-
-            def self.raw_data(subject)
-              Controls::RawData.example
             end
 
             def self.formatted_data(raw_data)
