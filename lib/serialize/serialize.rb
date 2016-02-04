@@ -14,14 +14,14 @@ module Serialize
     form_namespace.const_get(mode_constant_name)
   end
 
-  def raw_data(subject, form)
-    serializer = serializer(subject, form)
+  # def raw_data(subject, form)
+  #   serializer = serializer(subject, form)
 
-    mode = :raw_data
-    assure_mode(serializer, mode)
+  #   mode = :raw_data
+  #   assure_mode(serializer, mode)
 
-    serializer.send mode, subject
-  end
+  #   serializer.send mode, subject
+  # end
 
   def formatted_data(raw_data, subject, form)
     serializer = serializer(subject, form)
