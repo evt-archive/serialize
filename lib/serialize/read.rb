@@ -5,10 +5,8 @@ module Serialize
     def self.call(text, cls, format_name)
       format = format(cls, format_name)
 
-      mode = :deserialize
-
-      assure_mode(format, mode)
-      raw_data = format.send mode, text
+      assure_mode(format, :deserialize)
+      raw_data = format.deserialize text
 
       instance(raw_data, cls)
     end

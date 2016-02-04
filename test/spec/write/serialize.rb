@@ -1,10 +1,10 @@
-require_relative 'spec_init'
+require_relative '../spec_init'
 
 context "Serialize" do
-  test 'Writes' do
-    example = Serialize::Controls.example
-    val = Serialize::Write.(example, :some_serializer)
+  test "Converts an instance into text" do
+    instance = Serialize::Controls.example
+    text = Serialize::Write.(instance, :some_format)
 
-    assert(val == 'some write')
+    assert(text == Serialize::Controls::Text.example)
   end
 end
