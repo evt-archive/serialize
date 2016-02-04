@@ -2,10 +2,12 @@ require_relative '../spec_init'
 
 context "Raw Data" do
   test "Can be retrieved from serializer before it's converted" do
-    example = Serialize::Controls.example
+    control_raw_data = Serialize::Controls::RawData.example
 
-    raw_data = Serialize::Write.raw_data(example)
+    instance = Serialize::Controls::Instance.example
 
-    assert(raw_data == 'some raw data')
+    raw_data = Serialize::Write.raw_data(instance)
+
+    assert(raw_data == control_raw_data)
   end
 end

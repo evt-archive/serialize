@@ -2,9 +2,12 @@ require_relative '../spec_init'
 
 context "Serialize" do
   test "Converts an instance into text" do
-    instance = Serialize::Controls.example
+    control_text = Serialize::Controls::Text.example
+
+    instance = Serialize::Controls::Instance.example
+
     text = Serialize::Write.(instance, :some_format)
 
-    assert(text == Serialize::Controls::Text.example)
+    assert(text == control_text)
   end
 end

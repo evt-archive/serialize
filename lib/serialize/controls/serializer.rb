@@ -33,15 +33,5 @@ module Serialize
         end
       end
     end
-
-    def self.example
-      instance = Example.new
-      instance.some_attribute = Controls::RawData.example
-      instance
-    end
-
-    def self.example_class
-      Example
-    end
   end
 end
