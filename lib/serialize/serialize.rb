@@ -2,10 +2,7 @@ module Serialize
   class Error < RuntimeError; end
 
   def serializer(subject, form)
-    subject_const = subject_const(subject)
-
-    assure_serializer_namespace(subject_const)
-    serializer_namespace = subject_const.const_get(:Serializer)
+    serializer_namespace = serializer_namespace(subject)
 
     assure_form_method(form, serializer_namespace)
     form_namespace = serializer_namespace.send(form)
@@ -14,14 +11,21 @@ module Serialize
     form_namespace.const_get(mode_constant_name)
   end
 
-  # def raw_data(subject, form)
-  #   serializer = serializer(subject, form)
+  def serializer_namespace(subject)
+    subject_const = subject_const(subject)
 
-  #   mode = :raw_data
-  #   assure_mode(serializer, mode)
+    assure_serializer_namespace(subject_const)
+    subject_const.const_get(:Serializer)
+  end
 
-  #   serializer.send mode, subject
-  # end
+  def raw_data(subject, form)
+    serializer = serializer(subject, form)
+
+    mode = :raw_data
+    assure_mode(serializer, mode)
+
+    serializer.send mode, subject
+  end
 
   def formatted_data(raw_data, subject, form)
     serializer = serializer(subject, form)

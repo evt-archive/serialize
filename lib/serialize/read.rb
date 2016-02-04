@@ -10,13 +10,9 @@ module Serialize
       serializer.send mode, text
     end
 
-    def self.raw_data(raw_data, cls, form)
-      serializer = serializer(raw_data, form)
-
-      mode = :raw_data
-      assure_mode(serializer, mode)
-
-      serializer.send mode, raw_data
+    def self.instance(raw_data, cls)
+      serializer_namespace = serializer_namespace(cls)
+      serializer_namespace.read(raw_data)
     end
 
     def self.mode_constant_name

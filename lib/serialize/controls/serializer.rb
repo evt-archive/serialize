@@ -1,9 +1,25 @@
 module Serialize
   module Controls
     class Example
+      attr_accessor :some_attribute
+
+      def ==(other)
+        other.some_attribute == self.some_attribute
+      end
+
       module Serializer
         def self.some_serializer
           SomeSerializer
+        end
+
+        def self.read(raw_data)
+          instance = Example.new
+          instance.some_attribute = raw_data
+          instance
+        end
+
+        def self.write(instance)
+          instance.some_attribute
         end
 
         module SomeSerializer
@@ -13,7 +29,7 @@ module Serialize
             end
 
             def self.raw_data(subject)
-              'some raw data'
+              Controls::RawData.example
             end
 
             def self.formatted_data(raw_data)
@@ -27,7 +43,7 @@ module Serialize
             end
 
             def self.raw_data(subject)
-              'some raw data'
+              Controls::RawData.example
             end
 
             def self.formatted_data(raw_data)
@@ -39,7 +55,9 @@ module Serialize
     end
 
     def self.example
-      Example.new
+      instance = Example.new
+      instance.some_attribute = Controls::RawData.example
+      instance
     end
 
     def self.example_class

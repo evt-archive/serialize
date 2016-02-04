@@ -10,16 +10,6 @@ module Serialize
       serializer.send mode, subject
     end
 
-    def self.raw_data(subject, form)
-      serializer = serializer(subject, form)
-
-      mode = :raw_data
-      assure_mode(serializer, mode)
-
-      serializer.send mode, subject
-    end
-
-
     def self.mode_constant_name
       :Write
     end
