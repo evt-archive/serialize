@@ -18,15 +18,6 @@ module Serialize
     subject_const.const_get(:Serializer)
   end
 
-  def raw_data(subject, form)
-    serializer = serializer(subject, form)
-
-    mode = :raw_data
-    assure_mode(serializer, mode)
-
-    serializer.send mode, subject
-  end
-
   def formatted_data(raw_data, subject, form)
     serializer = serializer(subject, form)
 
