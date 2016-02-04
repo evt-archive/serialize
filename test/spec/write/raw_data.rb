@@ -1,7 +1,7 @@
 require_relative '../spec_init'
 
-describe "Raw Data" do
-  specify "Can be retrieved from serializer before it's converted" do
+context "Raw Data" do
+  test "Can be retrieved from serializer before it's converted" do
     example = Serialize::Controls.example
 
     raw_data = Serialize::Write.raw_data(example)
