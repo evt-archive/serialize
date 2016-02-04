@@ -1,3 +1,5 @@
+__END__
+
 require_relative 'spec_init'
 
 context "Read Failure Modes" do

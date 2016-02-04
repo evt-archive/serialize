@@ -1,3 +1,5 @@
+__END__
+
 require_relative 'spec_init'
 
 context "Write Failure Modes" do

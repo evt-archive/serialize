@@ -2,21 +2,20 @@ module Serialize
   module Read
     extend Serialize
 
-    def self.call(text, cls, form)
-      serializer = serializer(cls, form)
+    def self.call(text, cls, format_name)
+      format = format(cls, format_name)
 
-      mode = :call
-      assure_mode(serializer, mode)
-      serializer.send mode, text
+      mode = :deserialize
+
+      assure_mode(format, mode)
+      raw_data = format.send mode, text
+
+      instance(raw_data, cls)
     end
 
     def self.instance(raw_data, cls)
-      serializer_namespace = serializer_namespace(cls)
-      serializer_namespace.read(raw_data)
-    end
-
-    def self.mode_constant_name
-      :Read
+      serializer = serializer(cls)
+      serializer.instance(raw_data)
     end
   end
 end

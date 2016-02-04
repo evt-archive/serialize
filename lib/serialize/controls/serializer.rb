@@ -8,45 +8,27 @@ module Serialize
       end
 
       module Serializer
-        def self.some_serializer
-          SomeSerializer
+        def self.some_format
+          SomeFormat
         end
 
-        ## instance
-        def self.read(raw_data)
+        def self.instance(raw_data)
           instance = Example.new
           instance.some_attribute = raw_data
           instance
         end
 
-        ## raw_data
-        def self.write(instance)
+        def self.raw_data(instance)
           instance.some_attribute
         end
 
-        module SomeSerializer
-          module Write
-            def self.call(obj)
-              'some write'
-            end
-
-            def self.formatted_data(raw_data)
-              'some formatted data'
-            end
+        module SomeFormat
+          def self.serialize(raw_data)
+            Controls::Text.example
           end
 
-          module Read
-            def self.call(text)
-              'some read'
-            end
-
-            def self.raw_data(subject)
-              Controls::RawData.example
-            end
-
-            def self.formatted_data(raw_data)
-              'some formatted data'
-            end
+          def self.deserialize(text)
+            Controls::RawData.example
           end
         end
       end

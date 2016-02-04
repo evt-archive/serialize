@@ -1,4 +1,5 @@
 require 'serialize/controls/serializer'
+require 'serialize/controls/text'
 require 'serialize/controls/raw_data'
 require 'serialize/controls/no_serializer_namespace'
 require 'serialize/controls/no_serializer_form_method'

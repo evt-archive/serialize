@@ -22,7 +22,7 @@ module Serialize
 
     def self.raw_data(instance)
       serializer_namespace = serializer_namespace(instance)
-      serializer_namespace.write(instance)
+      serializer_namespace.raw_data(instance)
     end
 
     def self.mode_constant_name

@@ -1,3 +1,7 @@
+__END__
+keep this
+
+
 require_relative 'spec_init'
 
 context "Serializer" do
