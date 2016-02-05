@@ -2,16 +2,19 @@ module Serialize
   module Write
     extend Serialize
 
-    def self.call(subject, form)
-      serializer = serializer(subject, form)
+    def self.call(instance, format_name)
+      format = format(instance, format_name)
 
-      mode = :call
-      assure_mode(serializer, mode)
-      serializer.send mode, subject
+      raw_data = raw_data(instance)
+
+      assure_mode(format, :serialize)
+      format.serialize(raw_data)
     end
 
-    def self.mode_constant_name
-      :Write
+    def self.raw_data(instance)
+      serializer = serializer(instance)
+      assure_mode(serializer, :raw_data)
+      serializer.raw_data(instance)
     end
   end
 end

@@ -1,49 +1,37 @@
 module Serialize
   module Controls
     class Example
+      attr_accessor :some_attribute
+
+      def ==(other)
+        other.some_attribute == self.some_attribute
+      end
+
       module Serializer
-        def self.some_serializer
-          SomeSerializer
+        def self.some_format
+          SomeFormat
         end
 
-        module SomeSerializer
-          module Write
-            def self.call(obj)
-              'some write'
-            end
+        def self.instance(raw_data)
+          instance = Example.new
+          instance.some_attribute = raw_data
+          instance
+        end
 
-            def self.raw_data(subject)
-              'some raw data'
-            end
+        def self.raw_data(instance)
+          instance.some_attribute
+        end
 
-            def self.formatted_data(raw_data)
-              'some formatted data'
-            end
+        module SomeFormat
+          def self.serialize(raw_data)
+            Controls::Text.example
           end
 
-          module Read
-            def self.call(text)
-              'some read'
-            end
-
-            def self.raw_data(subject)
-              'some raw data'
-            end
-
-            def self.formatted_data(raw_data)
-              'some formatted data'
-            end
+          def self.deserialize(text)
+            Controls::RawData.example
           end
         end
       end
-    end
-
-    def self.example
-      Example.new
-    end
-
-    def self.example_class
-      Example
     end
   end
 end
