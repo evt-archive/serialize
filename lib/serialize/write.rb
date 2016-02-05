@@ -13,6 +13,7 @@ module Serialize
 
     def self.raw_data(instance)
       serializer = serializer(instance)
+      assure_mode(serializer, :raw_data)
       serializer.raw_data(instance)
     end
   end

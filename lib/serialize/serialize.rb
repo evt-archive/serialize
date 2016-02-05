@@ -1,4 +1,6 @@
 module Serialize
+  extend self
+
   class Error < RuntimeError; end
 
   def format(subject, format_name)

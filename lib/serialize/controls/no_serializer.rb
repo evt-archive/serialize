@@ -1,15 +1,7 @@
 module Serialize
   module Controls
-    module NoModeNamespace
+    module NoSerializer
       class Example
-        module Serializer
-          def self.some_serializer
-            SomeSerializer
-          end
-
-          module SomeSerializer
-          end
-        end
       end
 
       def self.example

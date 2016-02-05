@@ -1,19 +1,8 @@
 module Serialize
   module Controls
-    module NoModeMethod
+    module NoSerializerMethods
       class Example
         module Serializer
-          def self.some_serializer
-            SomeSerializer
-          end
-
-          module SomeSerializer
-            module Write
-            end
-
-            module Read
-            end
-          end
         end
       end
 

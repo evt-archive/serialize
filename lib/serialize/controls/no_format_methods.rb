@@ -1,7 +1,15 @@
 module Serialize
   module Controls
-    module NoSerializerNamespace
+    module NoFormatMethods
       class Example
+        module Serializer
+          def self.some_format
+            SomeFormat
+          end
+
+          module SomeFormat
+          end
+        end
       end
 
       def self.example
