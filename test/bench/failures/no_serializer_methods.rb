@@ -1,4 +1,4 @@
-require_relative '../spec_init'
+require_relative '../bench_init'
 
 context "Serializer namespace has no serializer methods" do
   example = Serialize::Controls::NoSerializerMethods.example

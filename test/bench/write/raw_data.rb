@@ -1,4 +1,4 @@
-require_relative '../spec_init'
+require_relative '../bench_init'
 
 context "Raw Data" do
   test "Can be retrieved from serializer before it's converted" do

@@ -1,4 +1,4 @@
-require_relative '../spec_init'
+require_relative '../bench_init'
 
 context "Format has no format methods" do
   example = Serialize::Controls::NoFormatMethods.example

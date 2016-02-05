@@ -1,4 +1,4 @@
-require_relative '../spec_init'
+require_relative '../bench_init'
 
 context "Raw Data" do
   test "Convert raw data into an instance" do

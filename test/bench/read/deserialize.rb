@@ -1,4 +1,4 @@
-require_relative '../spec_init'
+require_relative '../bench_init'
 
 context "Deserialize" do
   test "Converts text into an instance" do

@@ -1,4 +1,4 @@
-require_relative '../spec_init'
+require_relative '../bench_init'
 
 context "Class has no serializer namespace" do
   test "Is an error" do
