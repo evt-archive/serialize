@@ -54,6 +54,11 @@ module Serialize
     serializer.respond_to?(format_name)
   end
 
+  def format?(format_name, serializer)
+    format = get_format(format_name, serializer)
+    !!format
+  end
+
   def assure_mode(format, mode)
     unless mode?(format, mode)
       raise Error, "#{format.name} does not implement `#{mode}'"
@@ -82,6 +87,10 @@ module Serialize
     end      
 
     unless format_accessor?(format_name, serializer)
+      return false
+    end
+
+    unless format?(format_name, serializer)
       return false
     end
 

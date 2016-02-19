@@ -1,11 +1,17 @@
 require_relative '../bench_init'
 
 context "Class has no serializer namespace" do
-  test "Implementation is not detected" do
-    example = Serialize::Controls::NoSerializer.example
+  example = Serialize::Controls::NoSerializer.example
 
-    implemented = Serialize.implemented?(example, :some_format)
+  [Serialize::Read, Serialize::Write].each do |cls|
+    test "#{cls.name} implementation is not detected" do
+      implemented = cls.implemented?(example, :some_format)
+      assert(!implemented)
+    end
+  end
 
-    assert(!implemented)
+  test "Serializer is not detected" do
+    detected = Serialize.serializer?(example)
+    assert(!detected)
   end
 end
