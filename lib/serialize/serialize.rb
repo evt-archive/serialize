@@ -45,12 +45,12 @@ module Serialize
   end
 
   def assure_format(format_name, serializer)
-    unless format?(format_name, serializer)
+    unless format_accessor?(format_name, serializer)
       raise Error, "#{serializer.name} does not implement `#{format_name}'"
     end
   end
 
-  def format?(format_name, serializer)
+  def format_accessor?(format_name, serializer)
     serializer.respond_to?(format_name)
   end
 
@@ -81,7 +81,7 @@ module Serialize
       return false
     end      
 
-    unless format?(format_name, serializer)
+    unless format_accessor?(format_name, serializer)
       return false
     end
 

@@ -14,7 +14,7 @@ context "Serializer namespace has no serializer methods" do
 
   context "Format" do
     test "Not detected" do
-      format = Serialize.format?(:some_format, serializer)
+      format = Serialize.format_accessor?(:some_format, serializer)
       assert(!format)
     end
   end
