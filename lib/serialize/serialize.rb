@@ -6,14 +6,22 @@ module Serialize
   def format(subject, format_name)
     serializer = serializer(subject)
 
-    assure_format_method(format_name, serializer)
+    assure_format(format_name, serializer)
+    get_format(format_name, serializer)
+  end
+
+  def get_format(format_name, serializer)
     serializer.send(format_name)
   end
 
   def serializer(subject)
     subject_const = subject_const(subject)
 
-    assure_serializer_namespace(subject_const)
+    assure_serializer(subject_const)
+    get_serializer(subject_const)
+  end
+
+  def get_serializer(subject_const)
     subject_const.const_get(:Serializer)
   end
 
@@ -21,21 +29,38 @@ module Serialize
     [Module, Class].include?(subject.class) ? subject : subject.class
   end
 
-  def assure_serializer_namespace(subject_const)
-    unless subject_const.const_defined?(:Serializer)
+  def assure_serializer(subject_const)
+    unless serializer_const?(subject_const)
       raise Error, "#{subject_const.name} doesn't have a `Serializer' namespace"
     end
   end
 
-  def assure_format_method(format_name, serializer)
-    unless serializer.respond_to?(format_name)
+  def serializer?(subject)
+    subject_const = subject_const(subject)
+    serializer_const?(subject_const)    
+  end
+
+  def serializer_const?(subject_const)
+    subject_const.const_defined?(:Serializer)
+  end
+
+  def assure_format(format_name, serializer)
+    unless format?(format_name, serializer)
       raise Error, "#{serializer.name} does not implement `#{format_name}'"
     end
   end
 
-  def assure_mode(serializer, mode)
-    unless serializer.respond_to?(mode)
-      raise Error, "#{serializer.name} does not implement `#{mode}'"
+  def format?(format_name, serializer)
+    serializer.respond_to?(format_name)
+  end
+
+  def assure_mode(format, mode)
+    unless mode?(format, mode)
+      raise Error, "#{format.name} does not implement `#{mode}'"
     end
+  end
+
+  def mode?(format, mode)
+    format.respond_to?(mode)
   end
 end
