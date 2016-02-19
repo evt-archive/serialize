@@ -64,6 +64,10 @@ module Serialize
     format.respond_to?(mode)
   end
 
+  def intermediate?(serializer, intermediate_name)
+    serializer.respond_to?(intermediate_name)
+  end
+
   def implemented?(subject, format_name)
     subject_const = subject_const(subject)
 
@@ -73,7 +77,7 @@ module Serialize
 
     serializer = get_serializer(subject_const)
 
-    unless mode?(serializer, intermediate)
+    unless intermediate?(serializer, intermediate)
       return false
     end      
 

@@ -7,6 +7,12 @@ module Serialize
             SomeFormat
           end
 
+          def self.instance(raw_data)
+          end
+
+          def self.raw_data(instance)
+          end
+
           module SomeFormat
           end
         end
