@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'serialize'
-  s.version = '0.1.0.0'
+  s.version = '0.1.1.0'
   s.summary = 'Common interface for serialization and deserialization, and serializer discovery'
   s.description = ' '
 
