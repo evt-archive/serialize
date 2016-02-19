@@ -6,6 +6,10 @@ module Serialize
       :serialize
     end
 
+    def self.intermediate
+      :raw_data
+    end
+
     def self.call(instance, format_name)
       format = format(instance, format_name)
 
@@ -17,7 +21,7 @@ module Serialize
 
     def self.raw_data(instance)
       serializer = serializer(instance)
-      assure_mode(serializer, :raw_data)
+      assure_mode(serializer, intermediate)
       serializer.raw_data(instance)
     end
 
@@ -30,7 +34,7 @@ module Serialize
 
       serializer = get_serializer(subject_const)
 
-      unless mode?(serializer, :raw_data)
+      unless mode?(serializer, intermediate)
         return false
       end      
 

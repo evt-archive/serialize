@@ -6,6 +6,10 @@ module Serialize
       :deserialize
     end
 
+    def self.intermediate
+      :instance
+    end
+
     def self.call(text, cls, format_name)
       format = format(cls, format_name)
 
@@ -17,7 +21,7 @@ module Serialize
 
     def self.instance(raw_data, cls)
       serializer = serializer(cls)
-      assure_mode(serializer, :instance)
+      assure_mode(serializer, intermediate)
       serializer.instance(raw_data)
     end
 
@@ -25,25 +29,22 @@ module Serialize
       subject_const = subject_const(subject)
 
       unless serializer_const?(subject_const)
-        puts "no serializer_const"
         return false
       end
 
       serializer = get_serializer(subject_const)
 
-      unless mode?(serializer, :instance)
+      unless mode?(serializer, intermediate)
         return false
       end      
 
       unless format?(format_name, serializer)
-        puts "no format"
         return false
       end
 
       format = get_format(format_name, serializer)
 
       unless mode?(format, mode)
-        puts "no mode"
         return false
       end
 
