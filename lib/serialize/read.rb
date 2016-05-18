@@ -10,7 +10,11 @@ module Serialize
       :instance
     end
 
-    def self.call(text, cls, format_name)
+    def self.call(text, format_name, cls)
+      if format_name.instance_of?(Class) && cls.instance_of?(Symbol)
+        cls, format_name = format_name, cls
+      end
+
       format = format(cls, format_name)
 
       assure_mode(format, mode)
